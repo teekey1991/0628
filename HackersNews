@@ -1,29 +1,21 @@
 import requests
-
-# 変数にHTTPライブラリで、APIの情報を取得して代入する
-response = requests.get(
-       ')
-
-print(response)
-print(response.text)
-
-
-import requests
-
-# zipcode = input('郵便番号<ハイフン無し7桁>は？')
-zipcode = '0287111'
-
-response = requests.get(
-        f'https://hacker-news.firebaseio.com/v0/item/{zipcode}.json?print=pretty')
-
-# 辞書として表示
-print(response.json())
-# typeを使ってjsonを調べる
-print(type(response.json()))
-
-
 import time
+# 変数にHTTPライブラリで、APIの情報を取得して代入する
+response = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
+)
 
-for i in range(10):
-    time.sleep(1) # ここで1秒止まる
-    print(i)
+dic = response.json()
+till = int(input("何位まで表示する？"))
+# till = int(50)
+
+
+for number in range(0, int(till)):
+    news_id = dic[number]
+    contents = requests.get(f"https://hacker-news.firebaseio.com/v0/item/{news_id}.json?print=pretty")
+    data = contents.json()
+    print("'title': '", data.get("title"), "', 'Link':", data.get("url", None))
+    time.sleep(1)
+
+print("終了")
+
+# <span class="rank">1.</span>
