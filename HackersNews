@@ -1,0 +1,29 @@
+import requests
+
+# 変数にHTTPライブラリで、APIの情報を取得して代入する
+response = requests.get(
+       ')
+
+print(response)
+print(response.text)
+
+
+import requests
+
+# zipcode = input('郵便番号<ハイフン無し7桁>は？')
+zipcode = '0287111'
+
+response = requests.get(
+        f'https://hacker-news.firebaseio.com/v0/item/{zipcode}.json?print=pretty')
+
+# 辞書として表示
+print(response.json())
+# typeを使ってjsonを調べる
+print(type(response.json()))
+
+
+import time
+
+for i in range(10):
+    time.sleep(1) # ここで1秒止まる
+    print(i)
